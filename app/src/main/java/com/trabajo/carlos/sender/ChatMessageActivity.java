@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -52,7 +50,7 @@ import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.request.QBRequestUpdateBuilder;
 import com.squareup.picasso.Picasso;
-import com.trabajo.carlos.sender.adapters.MensajeChatAdapter;
+import com.trabajo.carlos.sender.adapters.MessageChatAdapter;
 import com.trabajo.carlos.sender.common.Common;
 import com.trabajo.carlos.sender.holder.QBMensajeHolder;
 
@@ -60,10 +58,8 @@ import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.muc.DiscussionHistory;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,14 +67,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
-public class ChatMensajeActivity extends AppCompatActivity implements View.OnClickListener, QBChatDialogMessageListener {
+public class ChatMessageActivity extends AppCompatActivity implements View.OnClickListener, QBChatDialogMessageListener {
 
     QBChatDialog qbChatDialog;
     ListView lsvListaMensajes;
     EditText edtMensaje, edtNombreGrupo;
     ImageButton imgbEnviar, imgbEmoji;
 
-    MensajeChatAdapter adapter;
+    MessageChatAdapter adapter;
 
     Toolbar toolbar;
 
@@ -190,8 +186,8 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                 //Cogemos la URI de la imagen seleccionada, la convertimos a un archivo y la subimos al servidor
                 Uri imagenSeleccionadaUri = data.getData();
 
-                final ProgressDialog mDialog = new ProgressDialog(ChatMensajeActivity.this);
-                mDialog.setMessage("Estableciendo imagen...");
+                final ProgressDialog mDialog = new ProgressDialog(ChatMessageActivity.this);
+                mDialog.setMessage("Setting image ...");
                 mDialog.setCancelable(false);
                 mDialog.show();
 
@@ -210,7 +206,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
 
                     int imageSizeKb = (int) file.length() / 1024;
                     if (imageSizeKb >= (1024 * 100)) {
-                        Toast.makeText(this, "Tamaño incorrecto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "\n" + "Incorrect size", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -234,7 +230,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
 
                                 @Override
                                 public void onError(QBResponseException e) {
-                                    Toast.makeText(ChatMensajeActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ChatMessageActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -280,7 +276,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                         ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(mensajeChat.getDialogId());
 
                         //Establecemos el adaptador de la lista
-                        adapter = new MensajeChatAdapter(getBaseContext(), mensajes);
+                        adapter = new MessageChatAdapter(getBaseContext(), mensajes);
                         lsvListaMensajes.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
@@ -289,8 +285,8 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                     edtMensaje.setText("");
                     edtMensaje.setFocusable(true);
                 } else {
-                    final ProgressDialog actualizarDialog = new ProgressDialog(ChatMensajeActivity.this);
-                    actualizarDialog.setMessage("Actualizando...");
+                    final ProgressDialog actualizarDialog = new ProgressDialog(ChatMessageActivity.this);
+                    actualizarDialog.setMessage("Updating...");
                     actualizarDialog.show();
 
                     QBMessageUpdateBuilder messageUpdateBuilder = new QBMessageUpdateBuilder();
@@ -321,7 +317,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                 Intent seleccionarImagen = new Intent();
                 seleccionarImagen.setType("image*//*");
                 seleccionarImagen.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(seleccionarImagen, "Seleccionar Imagen"), Common.SELECCIONAR_FOTO);
+                startActivityForResult(Intent.createChooser(seleccionarImagen, "\n" + "Select Image"), Common.SELECCIONAR_FOTO);
 
                 break;
 
@@ -335,7 +331,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
         ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatMessage.getDialogId());
 
         //Establecemos el adaptador de la lista
-        adapter = new MensajeChatAdapter(getBaseContext(), mensajes);
+        adapter = new MessageChatAdapter(getBaseContext(), mensajes);
         lsvListaMensajes.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -347,7 +343,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
 
     private void borrarUsuario() {
 
-        Intent intent = new Intent(this, ListadoUsuariosActivity.class);
+        Intent intent = new Intent(this, ListUsersActivity.class);
         intent.putExtra(Common.UPDATE_DIALOG_EXTRA, qbChatDialog);
         intent.putExtra(Common.UPDATE_MODE, Common.UPDATE_REMOVE_MODE);
         startActivity(intent);
@@ -356,7 +352,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
 
     private void addUsuario() {
 
-        Intent intent = new Intent(this, ListadoUsuariosActivity.class);
+        Intent intent = new Intent(this, ListUsersActivity.class);
         intent.putExtra(Common.UPDATE_DIALOG_EXTRA, qbChatDialog);
         intent.putExtra(Common.UPDATE_MODE, Common.UPDATE_ADD_MODE);
         startActivity(intent);
@@ -385,19 +381,19 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                         QBRestChatService.updateGroupChatDialog(qbChatDialog, requestBuilder).performAsync(new QBEntityCallback<QBChatDialog>() {
                             @Override
                             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
-                                Toast.makeText(ChatMensajeActivity.this, "Nombre del grupo actualizado", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChatMessageActivity.this, "Updated group name", Toast.LENGTH_SHORT).show();
                                 toolbar.setTitle(qbChatDialog.getName());
                             }
 
                             @Override
                             public void onError(QBResponseException e) {
-                                Toast.makeText(ChatMensajeActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ChatMessageActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -413,8 +409,8 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void borrarMensaje() {
-        final ProgressDialog borrarDialog = new ProgressDialog(ChatMensajeActivity.this);
-        borrarDialog.setMessage("Borrando...");
+        final ProgressDialog borrarDialog = new ProgressDialog(ChatMessageActivity.this);
+        borrarDialog.setMessage("Erasing...");
         borrarDialog.show();
 
         //Ponemos el mensaje para el edittext
@@ -429,7 +425,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onError(QBResponseException e) {
-                Toast.makeText(ChatMensajeActivity.this, "No tienes permiso para borrar este mensaje", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatMessageActivity.this, "You do not have permission to delete this message", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -459,7 +455,7 @@ public class ChatMensajeActivity extends AppCompatActivity implements View.OnCli
                     //Ponemos los mensajes en cache
                     QBMensajeHolder.getInstance().putMensajes(qbChatDialog.getDialogId(), qbChatMessages);
 
-                    adapter = new MensajeChatAdapter(getBaseContext(), qbChatMessages);
+                    adapter = new MessageChatAdapter(getBaseContext(), qbChatMessages);
                     lsvListaMensajes.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }

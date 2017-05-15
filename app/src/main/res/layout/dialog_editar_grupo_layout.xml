@@ -8,14 +8,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Introduzca nombre del grupo"
+        android:text="Enter group name"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
     
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtNombreGrupo"
-        android:hint="Nombre..."/>
+        android:hint="First name..."/>
 
     <requestFocus/>
 

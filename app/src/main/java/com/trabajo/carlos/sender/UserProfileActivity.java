@@ -122,7 +122,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 QBUsers.updateUser(user).performAsync(new QBEntityCallback<QBUser>() {
                     @Override
                     public void onSuccess(QBUser qbUser, Bundle bundle) {
-                        Toast.makeText(UserProfileActivity.this, "Usuario: " + qbUser.getLogin() + " actualizado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserProfileActivity.this, "User: " + qbUser.getLogin() + " updated", Toast.LENGTH_SHORT).show();
                         mDialog.dismiss();
                     }
 
@@ -154,7 +154,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 Uri imagenSeleccionadaUri = data.getData();
 
                 final ProgressDialog mDialog = new ProgressDialog(UserProfileActivity.this);
-                mDialog.setMessage("Subiendo foto...");
+                mDialog.setMessage("Uploading photo...");
                 mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();
 
@@ -174,7 +174,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                     //Cogemos el tamaño del archivo
                     final int imageSizeKb = (int) file.length() / 1024;
                     if (imageSizeKb >= (1024 * 100)) {
-                        Toast.makeText(this, "Tamaño incorrecto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "\n" + "Incorrect size", Toast.LENGTH_SHORT).show();
                     }
 
                     //Subimos la foto al servidor
@@ -222,7 +222,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 QBChatService.getInstance().logout(new QBEntityCallback<Void>() {
                     @Override
                     public void onSuccess(Void aVoid, Bundle bundle) {
-                        Toast.makeText(UserProfileActivity.this, "Te has desconectado!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserProfileActivity.this, "\n" + "You've disconnected!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
                         //Borramos todas las actividades previas
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

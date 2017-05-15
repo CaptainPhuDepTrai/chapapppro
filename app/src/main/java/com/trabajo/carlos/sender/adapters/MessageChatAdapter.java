@@ -15,12 +15,12 @@ import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
 
 import java.util.ArrayList;
 
-public class MensajeChatAdapter extends BaseAdapter {
+public class MessageChatAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<QBChatMessage> qbChatMessages;
 
-    public MensajeChatAdapter(Context context, ArrayList<QBChatMessage> qbChatMessages) {
+    public MessageChatAdapter(Context context, ArrayList<QBChatMessage> qbChatMessages) {
         this.context = context;
         this.qbChatMessages = qbChatMessages;
     }

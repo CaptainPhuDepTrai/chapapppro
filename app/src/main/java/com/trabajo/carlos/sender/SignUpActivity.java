@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 QBUsers.signUp(qbUser).performAsync(new QBEntityCallback<QBUser>() {
                     @Override
                     public void onSuccess(QBUser qbUser, Bundle bundle) {
-                        Toast.makeText(getBaseContext(), "Registrado correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "Registered Successfully", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

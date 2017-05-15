@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
                     @Override
                     public void onSuccess(QBUser qbUser, Bundle bundle) {
-                        Toast.makeText(getBaseContext(), "Logeado correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "\n" + "Login successfully", Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(MainActivity.this, ConversacionActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ConversationActivity.class);
                         intent.putExtra("user", user);
                         intent.putExtra("password", password);
                         startActivity(intent);

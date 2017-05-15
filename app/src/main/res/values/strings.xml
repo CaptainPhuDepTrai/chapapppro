@@ -4,46 +4,46 @@
     <string name="app_name">Sender</string>
     <string name="title_activity_chats_dialogs">ChatsDialogsActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
-    <string name="title_activity_chat_mensaje">ChatMensajeActivity</string>
+    <string name="title_activity_chat_mensaje">ChatMessageActivity</string>
 
     //Buttons
-    <string name="btnLogeo">Iniciar sesión</string>
-    <string name="btnRegistro">Registrar</string>
-    <string name="btnCrearChat">Crear chat</string>
-    <string name="btnActualizarPerfil">Actualizar perfil</string>
-    <string name="btnCancelar">Cancelar</string>
+    <string name="btnLogeo">Log in</string>
+    <string name="btnRegistro">Register</string>
+    <string name="btnCrearChat">Create chat</string>
+    <string name="btnActualizarPerfil">Update Profile</string>
+    <string name="btnCancelar">Cancel</string>
 
     //TextViews
-    <string name="txvLogin">LOGIN USUARIO</string>
-    <string name="txvRegistro">REGISTRO USUARIO</string>
-    <string name="txvNoRegistrado">¿No está registrado? Regístrese aquí.</string>
-    <string name="txvYaRegistrado">¿Ya registrado? Inicia sesión aquí.</string>
-    <string name="txvNoCuenta">¿No tiene una cuenta? Regístrese aqui</string>
-    <string name="txvOlvido">¿Olvidó su contraseña?</string>
-    <string name="txvCambiaEmail">Cambiar email:</string>
-    <string name="txvCambiaPass">Cambiar contraseña:</string>
-    <string name="txvBorrar">Eliminar usuario:</string>
-    <string name="txvReinicioPass">REINICIO CONTRASEÑA</string>
-    <string name="txvInstrucciones">Introduce el email con el que te registraste, te enviaremos las instrucciones.</string>
+    <string name="txvLogin">USER LOGIN</string>
+    <string name="txvRegistro">USER REGISTRATION</string>
+    <string name="txvNoRegistrado">"It's not registered? Register here."</string>
+    <string name="txvYaRegistrado">Already registered? Sign in here.</string>
+    <string name="txvNoCuenta">Do not have an account? Register here</string>
+    <string name="txvOlvido">Forgot your password?</string>
+    <string name="txvCambiaEmail">Change email:</string>
+    <string name="txvCambiaPass">Change Password:</string>
+    <string name="txvBorrar">Delete user:</string>
+    <string name="txvReinicioPass">RESET PASSWORD</string>
+    <string name="txvInstrucciones">Enter the email address you registered with, we will send you the instructions.</string>
 
     //EditTexts
-    <string name="edtUsername">Introduce su nombre de usuario</string>
-    <string name="edtPassword">Introduce su contraseña</string>
-    <string name="edtFullName">Introduce su nombre completo</string>
-    <string name="edtOldPass">Introduce su contraseña antigua</string>
-    <string name="edtNewPass">Introduce su contraseña nueva</string>
-    <string name="edtEmail">Introduce su email</string>
-    <string name="edtTelefono">Introduce su teléfono</string>
-    <string name="edtEscribir">Introduce el mensaje...</string>
+    <string name="edtUsername">Enter your username</string>
+    <string name="edtPassword">Enter your password</string>
+    <string name="edtFullName">Enter your full name</string>
+    <string name="edtOldPass">Enter your old password</string>
+    <string name="edtNewPass">Enter your new password</string>
+    <string name="edtEmail">Enter your email</string>
+    <string name="edtTelefono">Enter your phone number</string>
+    <string name="edtEscribir">Enter the message ...</string>
 
     //Descriptions
-    <string name="desIcono">icono principal</string>
-    <string name="desAvatar">icono avatar</string>
+    <string name="desIcono">Main icon</string>
+    <string name="desAvatar">Avatar icon</string>
 
     //Menus
-    <string name="menu_borrar">Borrar</string>
-    <string name="menu_actualizar">Actualizar</string>
+    <string name="menu_borrar">Delete</string>
+    <string name="menu_actualizar">To update</string>
     <string name="menu_LogOut">LogOut</string>
-    <string name="chat_dialog_menu_user">Perfil</string>
+    <string name="chat_dialog_menu_user">Profile</string>
 
 </resources>

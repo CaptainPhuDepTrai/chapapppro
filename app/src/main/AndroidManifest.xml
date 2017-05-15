@@ -22,16 +22,16 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity
-            android:name=".ConversacionActivity"
+            android:name=".ConversationActivity"
             android:label="@string/title_activity_chats_dialogs"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ListadoUsuariosActivity" />
+        <activity android:name=".ListUsersActivity" />
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ChatMensajeActivity"
+            android:name=".ChatMessageActivity"
             android:label="@string/title_activity_chat_mensaje"
             android:theme="@style/AppTheme" />
     </application>

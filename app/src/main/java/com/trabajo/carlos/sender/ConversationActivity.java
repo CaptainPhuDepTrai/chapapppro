@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ConversacionActivity extends AppCompatActivity implements View.OnClickListener, QBSystemMessageListener, QBChatDialogMessageListener {
+public class ConversationActivity extends AppCompatActivity implements View.OnClickListener, QBSystemMessageListener, QBChatDialogMessageListener {
 
     FloatingActionButton fabAddUser;
     ListView lsvChats;
@@ -65,7 +65,7 @@ public class ConversacionActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 QBChatDialog qbChatDialog = (QBChatDialog) lsvChats.getAdapter().getItem(position);
-                Intent intent = new Intent(ConversacionActivity.this, ChatMensajeActivity.class);
+                Intent intent = new Intent(ConversationActivity.this, ChatMessageActivity.class);
                 intent.putExtra(Common.DIALOG_EXTRA, qbChatDialog);
                 startActivity(intent);
             }
@@ -131,7 +131,7 @@ public class ConversacionActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.fabAddUser:
 
-                Intent intent = new Intent(ConversacionActivity.this, ListadoUsuariosActivity.class);
+                Intent intent = new Intent(ConversationActivity.this, ListUsersActivity.class);
                 startActivity(intent);
 
                 break;
@@ -177,7 +177,7 @@ public class ConversacionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void showUserProfile() {
-        Intent intent = new Intent(ConversacionActivity.this, UserProfileActivity.class);
+        Intent intent = new Intent(ConversationActivity.this, UserProfileActivity.class);
         startActivity(intent);
     }
 
@@ -225,7 +225,7 @@ public class ConversacionActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void crearChatSesion() {
-        final ProgressDialog mDialogo = new ProgressDialog(ConversacionActivity.this);
+        final ProgressDialog mDialogo = new ProgressDialog(ConversationActivity.this);
         mDialogo.setMessage("Espere...");
         mDialogo.setCanceledOnTouchOutside(false);
         mDialogo.show();
@@ -269,10 +269,10 @@ public class ConversacionActivity extends AppCompatActivity implements View.OnCl
 
                         //Añadimos un listener para el mensaje de sistema recibido
                         QBSystemMessagesManager qbSystemMessagesManager = QBChatService.getInstance().getSystemMessagesManager();
-                        qbSystemMessagesManager.addSystemMessageListener(ConversacionActivity.this);
+                        qbSystemMessagesManager.addSystemMessageListener(ConversationActivity.this);
 
                         QBIncomingMessagesManager qbIncomingMessagesManager = QBChatService.getInstance().getIncomingMessagesManager();
-                        qbIncomingMessagesManager.addDialogMessageListener(ConversacionActivity.this);
+                        qbIncomingMessagesManager.addDialogMessageListener(ConversationActivity.this);
                     }
 
                     @Override

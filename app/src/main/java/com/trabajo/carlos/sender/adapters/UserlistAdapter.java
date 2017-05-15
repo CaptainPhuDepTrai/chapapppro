@@ -12,12 +12,12 @@ import com.quickblox.users.model.QBUser;
 
 import java.util.ArrayList;
 
-public class ListadoUsuariosAdapter extends BaseAdapter {
+public class UserlistAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<QBUser> qbUserArrayList;
 
-    public ListadoUsuariosAdapter(Context context, ArrayList<QBUser> qbUserArrayList) {
+    public UserlistAdapter(Context context, ArrayList<QBUser> qbUserArrayList) {
         this.context = context;
         this.qbUserArrayList = qbUserArrayList;
     }

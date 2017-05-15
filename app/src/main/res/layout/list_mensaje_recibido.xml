@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.trabajo.carlos.sender.ChatMensajeActivity">
+
+    <TextView
+        android:id="@+id/txvUsuarioMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.github.library.bubbleview.BubbleTextView
+        android:id="@+id/btxvMensaje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/txvUsuarioMensaje"
+        android:padding="10dp"
+        android:textColor="@android:color/white"
+        app:angle="8dp"
+        app:arrowCenter="true"
+        app:arrowHeight="10dp"
+        app:arrowLocation="left"
+        app:arrowWidth="8dp"
+        app:bubbleColor="@color/colorPrimary" />
+
+</RelativeLayout>

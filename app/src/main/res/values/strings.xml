@@ -1,0 +1,49 @@
+<resources>
+
+    //Actions and Titles
+    <string name="app_name">Sender</string>
+    <string name="title_activity_chats_dialogs">ChatsDialogsActivity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="title_activity_chat_mensaje">ChatMensajeActivity</string>
+
+    //Buttons
+    <string name="btnLogeo">Iniciar sesión</string>
+    <string name="btnRegistro">Registrar</string>
+    <string name="btnCrearChat">Crear chat</string>
+    <string name="btnActualizarPerfil">Actualizar perfil</string>
+    <string name="btnCancelar">Cancelar</string>
+
+    //TextViews
+    <string name="txvLogin">LOGIN USUARIO</string>
+    <string name="txvRegistro">REGISTRO USUARIO</string>
+    <string name="txvNoRegistrado">¿No está registrado? Regístrese aquí.</string>
+    <string name="txvYaRegistrado">¿Ya registrado? Inicia sesión aquí.</string>
+    <string name="txvNoCuenta">¿No tiene una cuenta? Regístrese aqui</string>
+    <string name="txvOlvido">¿Olvidó su contraseña?</string>
+    <string name="txvCambiaEmail">Cambiar email:</string>
+    <string name="txvCambiaPass">Cambiar contraseña:</string>
+    <string name="txvBorrar">Eliminar usuario:</string>
+    <string name="txvReinicioPass">REINICIO CONTRASEÑA</string>
+    <string name="txvInstrucciones">Introduce el email con el que te registraste, te enviaremos las instrucciones.</string>
+
+    //EditTexts
+    <string name="edtUsername">Introduce su nombre de usuario</string>
+    <string name="edtPassword">Introduce su contraseña</string>
+    <string name="edtFullName">Introduce su nombre completo</string>
+    <string name="edtOldPass">Introduce su contraseña antigua</string>
+    <string name="edtNewPass">Introduce su contraseña nueva</string>
+    <string name="edtEmail">Introduce su email</string>
+    <string name="edtTelefono">Introduce su teléfono</string>
+    <string name="edtEscribir">Introduce el mensaje...</string>
+
+    //Descriptions
+    <string name="desIcono">icono principal</string>
+    <string name="desAvatar">icono avatar</string>
+
+    //Menus
+    <string name="menu_borrar">Borrar</string>
+    <string name="menu_actualizar">Actualizar</string>
+    <string name="menu_LogOut">LogOut</string>
+    <string name="chat_dialog_menu_user">Perfil</string>
+
+</resources>

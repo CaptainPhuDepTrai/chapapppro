@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/chat_group_edit_name"
+        android:icon="@drawable/ic_editar"
+        android:title="Editar Nombre Grupo"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/chat_group_add_user"
+        android:icon="@drawable/ic_add"
+        android:title="Añadir Usuario"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/chat_group_remove_user"
+        android:icon="@drawable/ic_borrar"
+        android:title="Borrar Usuario"
+        app:showAsAction="ifRoom"/>
+
+</menu>

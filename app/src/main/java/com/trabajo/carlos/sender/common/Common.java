@@ -18,7 +18,8 @@ public class Common {
     public static String createChatDialogName(List<Integer> qbUsuarios) {
         List<QBUser> qbUsers1 = QBUsuariosHolder.getInstance().getUsersById(qbUsuarios);
 
-        //El nombre del dialogo sera el nombre de todos los usuarios en la lista, si la longitud del nombre es mayor a 30  ponemos un "..." al final
+        // The name of the dialog will be the name of all the users in the list, if the length of the name is greater than 30 we put a "..." at the end
+
         StringBuilder nombre = new StringBuilder();
         for (QBUser user : qbUsers1)
             nombre.append(user.getFullName()).append(" ");
@@ -27,7 +28,8 @@ public class Common {
         return nombre.toString();
     }
 
-    //Comprobamos si el string esta vacio o es nulo
+
+    // Check if string is empty or null
     public static boolean isNuloOVacioString(String content) {
         return (!(content != null && !content.trim().isEmpty()));
     }

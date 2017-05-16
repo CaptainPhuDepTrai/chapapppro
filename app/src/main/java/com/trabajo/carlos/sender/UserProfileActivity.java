@@ -64,7 +64,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
         btnCancelarUpdate.setOnClickListener(this);
         imgUserAvatar.setOnClickListener(this);
 
-        //Cargamos el perfil del usuario desde webservices
+        //We upload the user profile from webservices
         loadUserProfile();
 
     }
@@ -99,10 +99,10 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 String email = edtEmail.getText().toString();
                 String telefono = edtTelefono.getText().toString();
 
-                //Cogemos el id del usuario que esta logeado
+                //We take the id of the user that is logged in
                 QBUser user = new QBUser();
                 user.setId(QBChatService.getInstance().getUser().getId());
-                //Comprobamos que los eddittext no sean nulos ni vacios
+                //We check that the edittext are not null and empty
                 if (!Common.isNuloOVacioString(oldPass))
                     user.setOldPassword(oldPass);
                 if (!Common.isNuloOVacioString(newPass))
@@ -118,7 +118,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 mDialog.setMessage("Espere...");
                 mDialog.show();
 
-                //Actualizamos el usuario
+                //We update the user
                 QBUsers.updateUser(user).performAsync(new QBEntityCallback<QBUser>() {
                     @Override
                     public void onSuccess(QBUser qbUser, Bundle bundle) {
@@ -158,7 +158,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                 mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();
 
-                //Actualizar el avatar del usuario
+                //Update user avatar
                 try {
 
                     InputStream in = getContentResolver().openInputStream(imagenSeleccionadaUri);
@@ -171,22 +171,22 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                     fos.flush();
                     fos.close();
 
-                    //Cogemos el tamaño del archivo
+                    //We take the file size
                     final int imageSizeKb = (int) file.length() / 1024;
                     if (imageSizeKb >= (1024 * 100)) {
                         Toast.makeText(this, "\n" + "Incorrect size", Toast.LENGTH_SHORT).show();
                     }
 
-                    //Subimos la foto al servidor
+                    //Upload the photo to the server
                     QBContent.uploadFileTask(file, true, null).performAsync(new QBEntityCallback<QBFile>() {
                         @Override
                         public void onSuccess(QBFile qbFile, Bundle bundle) {
-                            //Set avatar para el usuario
+                            //Avatar set for the user
                             QBUser user = new QBUser();
                             user.setId(QBChatService.getInstance().getUser().getId());
                             user.setFileId(Integer.parseInt(qbFile.getId().toString()));
 
-                            //Actualizamos el usuario
+                            //We update the user
                             QBUsers.updateUser(user).performAsync(new QBEntityCallback<QBUser>() {
                                 @Override
                                 public void onSuccess(QBUser qbUser, Bundle bundle) {
@@ -224,7 +224,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                     public void onSuccess(Void aVoid, Bundle bundle) {
                         Toast.makeText(UserProfileActivity.this, "\n" + "You've disconnected!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
-                        //Borramos todas las actividades previas
+                        //Delete all previous activities
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
@@ -246,11 +246,11 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
 
     private void loadUserProfile() {
 
-        //Cargamos el avatar
+        //We load the avatar
         QBUsers.getUser(QBChatService.getInstance().getUser().getId()).performAsync(new QBEntityCallback<QBUser>() {
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {
-                //Guardamos en cache
+                //Caching
                 QBUsuariosHolder.getInstance().putUser(qbUser);
                 if (qbUser.getFileId() != null) {
                     int imagenPerfilId = qbUser.getFileId();

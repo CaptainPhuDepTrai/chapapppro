@@ -78,16 +78,16 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
     Toolbar toolbar;
 
-    //Actualizar usuario online
+    //Update user online
     ImageView imgvContadorOnline, imgAvatar;
     TextView txvContadorOnline;
 
-    //Variables para actualizar/borrar mensajes
+    //Variables for updating / deleting messages
     int contextMenuIndexClicked = -1;
     boolean isEditMode = false;
     QBChatMessage editMensaje;
 
-    //Variables escribiendo...
+    //Variables typing ...
     DotLoader dotLoader;
 
     @Override
@@ -116,7 +116,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
         imgbEnviar.setOnClickListener(this);
         imgAvatar.setOnClickListener(this);
 
-        //Añadimos el context menu
+        //Add context menu
         registerForContextMenu(lsvListaMensajes);
 
     }
@@ -138,7 +138,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //Cogemos el index context menu click
+        //Let's take the index context menu click
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         contextMenuIndexClicked = info.position;
 
@@ -183,7 +183,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
         if (resultCode == RESULT_OK) {
             if (requestCode == Common.SELECCIONAR_FOTO) {
-                //Cogemos la URI de la imagen seleccionada, la convertimos a un archivo y la subimos al servidor
+                //We take the URI of the selected image, convert it to a file and upload it to the serve
                 Uri imagenSeleccionadaUri = data.getData();
 
                 final ProgressDialog mDialog = new ProgressDialog(ChatMessageActivity.this);
@@ -193,7 +193,8 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
                 try {
 
-                    //Convertimos URI a File
+                    //Convert URI to File
+
                     InputStream inputStream = getContentResolver().openInputStream(imagenSeleccionadaUri);
                     final Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -210,14 +211,14 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                         return;
                     }
 
-                    //Subimos la imagen
+                    //Upload the image
                     QBContent.uploadFileTask(file, true, null).performAsync(new QBEntityCallback<QBFile>() {
                         @Override
                         public void onSuccess(QBFile qbFile, Bundle bundle) {
 
                             qbChatDialog.setPhoto(qbFile.getId().toString());
 
-                            //Actualizamos la conversacion
+                            //We update the conversation
                             QBRequestUpdateBuilder requestUpdateBuilder = new QBDialogRequestBuilder();
                             QBRestChatService.updateGroupChatDialog(qbChatDialog, requestUpdateBuilder).performAsync(new QBEntityCallback<QBChatDialog>() {
                                 @Override
@@ -263,25 +264,25 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                     mensajeChat.setSaveToHistory(true);
 
                     try {
-                        //Enviamos el mensaje
+                        //We send the message
                         qbChatDialog.sendMessage(mensajeChat);
                     } catch (SmackException.NotConnectedException e) {
                         e.printStackTrace();
                     }
 
-                    //Arreglamos el bug de que el chat privado no muestra mensajes
+                    //We fixed the bug that private chat does not display messages
                     if (qbChatDialog.getType() == QBDialogType.PRIVATE) {
-                        //Mensaje en cache
+                        //Cached Message
                         QBMensajeHolder.getInstance().putMensaje(qbChatDialog.getDialogId(), mensajeChat);
                         ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(mensajeChat.getDialogId());
 
-                        //Establecemos el adaptador de la lista
+                        //We set the adapter from the list
                         adapter = new MessageChatAdapter(getBaseContext(), mensajes);
                         lsvListaMensajes.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
 
-                    //Limpiamos el EdditText
+                    //Clean EdditText
                     edtMensaje.setText("");
                     edtMensaje.setFocusable(true);
                 } else {
@@ -294,12 +295,12 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                     QBRestChatService.updateMessage(editMensaje.getId(), qbChatDialog.getDialogId(), messageUpdateBuilder).performAsync(new QBEntityCallback<Void>() {
                         @Override
                         public void onSuccess(Void aVoid, Bundle bundle) {
-                            //Recargamos los mensajes del servidor
+                            //Recharge messages from the server
                             recogerMensaje();
                             isEditMode = false;
                             actualizarDialog.dismiss();
 
-                            //reseteamos el edittext
+                            //Reset the edittext
                             edtMensaje.setText("");
                             edtMensaje.setFocusable(true);
                         }
@@ -326,11 +327,11 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
-        //Mensaje en cache
+        //Cached Message
         QBMensajeHolder.getInstance().putMensaje(qbChatMessage.getDialogId(), qbChatMessage);
         ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatMessage.getDialogId());
 
-        //Establecemos el adaptador de la lista
+        //We set the adapter from the list
         adapter = new MessageChatAdapter(getBaseContext(), mensajes);
         lsvListaMensajes.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -374,7 +375,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        //Establecemos nuevo nombre
+                        //We establish a new name
                         qbChatDialog.setName(edtNombreGrupo.getText().toString());
 
                         QBDialogRequestBuilder requestBuilder = new QBDialogRequestBuilder();
@@ -402,7 +403,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                     }
                 });
 
-        //Creamos alerta
+        //We create alert
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
 
@@ -413,7 +414,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
         borrarDialog.setMessage("Erasing...");
         borrarDialog.show();
 
-        //Ponemos el mensaje para el edittext
+        //We put the message for edittext
         editMensaje = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
 
         QBRestChatService.deleteMessage(editMensaje.getId(), false).performAsync(new QBEntityCallback<Void>() {
@@ -432,7 +433,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
     private void actualizarMensaje() {
 
-        //Ponemos el mensaje para el edittext
+        //We put the message for edittext
         editMensaje = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
         edtMensaje.setText(editMensaje.getBody());
         isEditMode = true;
@@ -440,19 +441,19 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     }
 
     /**
-     * Metodo que carga los mensajes que se van enviando y recibiendo en la lista
+     * Method that loads the messages that are sent and receiving in the list
      */
     private void recogerMensaje() {
 
         QBMessageGetBuilder messageGetBuilder = new QBMessageGetBuilder();
-        //El limite son 500 mensajes
+        //The limit is 500 messages
         messageGetBuilder.setLimit(500);
 
         if (qbChatDialog != null) {
             QBRestChatService.getDialogMessages(qbChatDialog, messageGetBuilder).performAsync(new QBEntityCallback<ArrayList<QBChatMessage>>() {
                 @Override
                 public void onSuccess(ArrayList<QBChatMessage> qbChatMessages, Bundle bundle) {
-                    //Ponemos los mensajes en cache
+                    //We cache messages
                     QBMensajeHolder.getInstance().putMensajes(qbChatDialog.getDialogId(), qbChatMessages);
 
                     adapter = new MessageChatAdapter(getBaseContext(), qbChatMessages);
@@ -494,7 +495,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
         qbChatDialog.initForChat(QBChatService.getInstance());
 
-        //Registrar el listener del mensaje que llega
+        //Record the listener of the arriving message
         QBIncomingMessagesManager incomingMensaje = QBChatService.getInstance().getIncomingMessagesManager();
         incomingMensaje.addDialogMessageListener(new QBChatDialogMessageListener() {
             @Override
@@ -511,7 +512,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
         //Add typing listener
         mostrarEscribiendoConversacion(qbChatDialog);
 
-        //Activamos que se pueda unir a un chat grupal
+        //We enable you to join a group chat
         if (qbChatDialog.getType() == QBDialogType.PUBLIC_GROUP || qbChatDialog.getType() == QBDialogType.GROUP) {
             DiscussionHistory discussionHistory = new DiscussionHistory();
             discussionHistory.setMaxStanzas(0);
@@ -539,7 +540,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                         @Override
                         public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
 
-                            //Cogemos el usuario online
+                            //We take the user online
                             try {
 
                                 Collection<Integer> listaOnline = qbChatDialog.getOnlineUsers();
@@ -575,14 +576,15 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
         qbChatDialog.addMessageListener(this);
 
-        //Ponemos titulo para el toolbar
+        //Put title for the toolbar
         toolbar.setTitle(qbChatDialog.getName());
         setSupportActionBar(toolbar);
 
     }
 
     /**
-     * Listener para cuando alguien esta escribiendo
+     *
+     Listener for when someone is typing
      * @param qbChatDialog
      */
     private void mostrarEscribiendoConversacion(QBChatDialog qbChatDialog) {

@@ -142,11 +142,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void processMessage(QBChatMessage qbChatMessage) {
-        //Ponemos los dialogos en cache
+        //We put the dialogues in cache
+
         QBRestChatService.getChatDialogById(qbChatMessage.getBody()).performAsync(new QBEntityCallback<QBChatDialog>() {
             @Override
             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
-                //Lo ponemos en cache
+                //We cache it
                 QBChatDialogHolder.getInstance().putDialog(qbChatDialog);
                 ArrayList<QBChatDialog> adapterSource = QBChatDialogHolder.getInstance().getAllChatDialogs();
                 ChatDialogsAdapter adapters = new ChatDialogsAdapter(getBaseContext(), adapterSource);
@@ -185,11 +186,11 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         QBRequestGetBuilder requestBuilder = new QBRequestGetBuilder();
         requestBuilder.setLimit(100);
 
-        //Cogemos todos los chats que hay
+        //We take all the chats there are
         QBRestChatService.getChatDialogs(null, requestBuilder).performAsync(new QBEntityCallback<ArrayList<QBChatDialog>>() {
             @Override
             public void onSuccess(final ArrayList<QBChatDialog> qbChatDialogs, Bundle bundle) {
-                //Ponemos todos los dialogos en cache
+                //We put all the dialogues in cache
                 QBChatDialogHolder.getInstance().putDialogs(qbChatDialogs);
 
                 //Configurar unread
@@ -197,14 +198,14 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                 for (QBChatDialog chatDialog : qbChatDialogs)
                     setIds.add(chatDialog.getDialogId());
 
-                //Coger el mensaje no leido
+                //Take the unread message
                 QBRestChatService.getTotalUnreadMessagesCount(setIds, QBUnreadMensajeHolder.getInstance().getBundle()).performAsync(new QBEntityCallback<Integer>() {
                     @Override
                     public void onSuccess(Integer integer, Bundle bundle) {
-                        //Guardar en cache
+                        //Caching
                         QBUnreadMensajeHolder.getInstance().setBundle(bundle);
 
-                        //Refrescar la lista
+                        //Refresh the list
                         ChatDialogsAdapter adapter = new ChatDialogsAdapter(getBaseContext(), QBChatDialogHolder.getInstance().getAllChatDialogs());
                         lsvChats.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
@@ -230,12 +231,12 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         mDialogo.setCanceledOnTouchOutside(false);
         mDialogo.show();
 
-        //Recogemos el usuario y la contraseña del MainActivity
+        //We collect the user and password of the MainActivity
         String user, password;
         user = getIntent().getStringExtra("user");
         password = getIntent().getStringExtra("password");
 
-        //Cargamos todos los usuarios y lo guardamos en cache
+        //We load all users and cache
         QBUsers.getUsers(null).performAsync(new QBEntityCallback<ArrayList<QBUser>>() {
             @Override
             public void onSuccess(ArrayList<QBUser> qbUsers, Bundle bundle) {
@@ -252,7 +253,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         QBAuth.createSession(qbUser).performAsync(new QBEntityCallback<QBSession>() {
             @Override
             public void onSuccess(QBSession qbSession, Bundle bundle) {
-                //Cogemos el id del usuario
+                //We take the id of the user
                 qbUser.setId(qbSession.getUserId());
 
                 try {
@@ -261,13 +262,14 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                     e.printStackTrace();
                 }
 
-                //Hacemos el login
+                //We login
+
                 QBChatService.getInstance().login(qbUser, new QBEntityCallback() {
                     @Override
                     public void onSuccess(Object o, Bundle bundle) {
                         mDialogo.dismiss();
 
-                        //Añadimos un listener para el mensaje de sistema recibido
+                        //We add a listener for the received system message
                         QBSystemMessagesManager qbSystemMessagesManager = QBChatService.getInstance().getSystemMessagesManager();
                         qbSystemMessagesManager.addSystemMessageListener(ConversationActivity.this);
 
@@ -296,7 +298,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onSuccess(Void aVoid, Bundle bundle) {
 
-                //Borramos esta conversacion de cache y refrescamos el listview
+                //We delete this cache conversation and refresh the listview
                 QBChatDialogHolder.getInstance().borrarConversacion(chatDialog.getDialogId());
                 ChatDialogsAdapter adapter = new ChatDialogsAdapter(getBaseContext(), QBChatDialogHolder.getInstance().getAllChatDialogs());
                 lsvChats.setAdapter(adapter);

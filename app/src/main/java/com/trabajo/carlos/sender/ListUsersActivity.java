@@ -97,7 +97,8 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
                             }
                         }
 
-                        //LLamamos a los servicios
+                        //We call the services
+
                         QBRestChatService.updateGroupChatDialog(qbChatDialog, requestBuilder).performAsync(new QBEntityCallback<QBChatDialog>() {
                             @Override
                             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
@@ -128,7 +129,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
                             }
                         }
 
-                        //LLamamos a los servicios
+                        //We call the services
                         QBRestChatService.updateGroupChatDialog(qbChatDialog, requestBuilder).performAsync(new QBEntityCallback<QBChatDialog>() {
                             @Override
                             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
@@ -188,11 +189,11 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
 
                 ArrayList<QBUser> listadoUsuarios = QBUsuariosHolder.getInstance().getAllUsers();
 
-                //Cogemos toda la info de los Occupants
+                //We take all the info of the Occupants
                 List<Integer> occupantsId = qbChatDialog.getOccupants();
                 List<QBUser> listUsuariosYaEnElGrupo = QBUsuariosHolder.getInstance().getUsersById(occupantsId);
 
-                //Borrar todos los usuarios que ya estan en el grupo
+                //Delete all users who are already in the group
                 for (QBUser user : listUsuariosYaEnElGrupo)
                     listadoUsuarios.remove(user);
                 if (listadoUsuarios.size() > 0) {
@@ -222,10 +223,11 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
                         qbUserWithoutCurrent.add(user);
                 }
 
-                //Cargamos la lista con los usuarios
+                //We load the list with the users
                 UserlistAdapter adapter = new UserlistAdapter(getBaseContext(), qbUserWithoutCurrent);
                 lsvUsuarios.setAdapter(adapter);
-                //notificamos cuando cambia
+                //We notify you when you change
+
                 adapter.notifyDataSetChanged();
 
             }
@@ -246,7 +248,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
         int contadorEleccion = lsvUsuarios.getCount();
         ArrayList<Integer> occupantIdsList = new ArrayList<>();
 
-        //Recorremos todos los usuarios, si un usuario ha sido seleccionado creamos un dialogo con dicho usuario
+        //We walk all users, if a user has been selected we create a dialog with that user
         for (int i = 0; i < contadorEleccion; i++) {
             if (checkedItemPositions.get(i)) {
                 QBUser usuario = (QBUser) lsvUsuarios.getItemAtPosition(i);
@@ -254,7 +256,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
             }
         }
 
-        //Creamos chat dialogo
+        //Create chat dialog
         QBChatDialog dialogo = new QBChatDialog();
         dialogo.setName(Common.createChatDialogName(occupantIdsList));
         dialogo.setType(QBDialogType.GROUP);
@@ -271,7 +273,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
                 QBChatMessage qbChatMessage = new QBChatMessage();
                 qbChatMessage.setBody(qbChatDialog.getDialogId());
 
-                //Cogemos todos los ids de los ocupantes del grupo
+                //We take all the ids of the occupants of the group
                 for (int i = 0; i < qbChatDialog.getOccupants().size(); i++) {
                     qbChatMessage.setRecipientId(qbChatDialog.getOccupants().get(i));
                     try {
@@ -301,7 +303,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
 
         int contadorEleccion = lsvUsuarios.getCount();
 
-        //Recorremos todos los usuarios, si un usuario ha sido seleccionado creamos un dialogo con dicho usuario
+        //We walk all users, if a user has been selected we create a dialog with that user
         for (int i = 0; i < contadorEleccion; i++) {
             if (checkedItemPositions.get(i)) {
                 final QBUser usuario = (QBUser) lsvUsuarios.getItemAtPosition(i);

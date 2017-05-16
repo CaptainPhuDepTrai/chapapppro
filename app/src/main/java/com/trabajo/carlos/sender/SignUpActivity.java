@@ -50,10 +50,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 String nombre = edtNombre.getText().toString();
                 String password = edtPassword.getText().toString();
 
-                //Creamos la instancia para crear un nuevo usuario y le pasamos el usuario y la contraseña
+                //We create the instance to create a new user and pass the user and password
                 QBUser qbUser = new QBUser(user, password);
 
-                //Establecemos el nombre completo
+                //We establish the full name
                 qbUser.setFullName(nombre);
 
                 QBUsers.signUp(qbUser).performAsync(new QBEntityCallback<QBUser>() {
@@ -81,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private void registroSesion() {
 
-        //Creamos la sesion
+        //We create the session
         QBAuth.createSession().performAsync(new QBEntityCallback<QBSession>() {
             @Override
             public void onSuccess(QBSession qbSession, Bundle bundle) {

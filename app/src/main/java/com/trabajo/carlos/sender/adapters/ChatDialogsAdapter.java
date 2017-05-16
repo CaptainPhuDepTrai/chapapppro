@@ -68,7 +68,7 @@ public class ChatDialogsAdapter extends BaseAdapter {
             txvMensaje.setText(qbChatDialogs.get(position).getLastMessage());
             txvTitulo.setText(qbChatDialogs.get(position).getName());
 
-            //Color random para las fotos de la lista
+            //Color random for photos from the list
             ColorGenerator generator = ColorGenerator.MATERIAL;
             int randomColor = generator.getRandomColor();
 
@@ -78,13 +78,13 @@ public class ChatDialogsAdapter extends BaseAdapter {
                         .endConfig()
                         .round();
 
-                //Cogemos el primer caracter en mayusculas del texto de la lista para mostrarlo en el ImageView
+                //We take the first uppercase character of the text from the list to display it in the ImageView
                 TextDrawable drawable = builder.build(txvTitulo.getText().toString().substring(0, 1).toUpperCase(), randomColor);
                 img.setImageDrawable(drawable);
 
             } else {
 
-                //Nos descargamos el bitmap del servidor y lo establecemos en la conversacion
+                //We downloaded the bitmap from the server and set it in the conversation
                 QBContent.getFile(Integer.parseInt(qbChatDialogs.get(position).getPhoto())).performAsync(new QBEntityCallback<QBFile>() {
                     @Override
                     public void onSuccess(QBFile qbFile, Bundle bundle) {
@@ -104,7 +104,7 @@ public class ChatDialogsAdapter extends BaseAdapter {
 
             }
 
-            //Establecer contador mensajes no leidos
+            //Set counter unread messages
             TextDrawable.IBuilder unreadBuilder = TextDrawable.builder().beginConfig()
                     .endConfig()
                     .round();

@@ -49,19 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    /*private void requestRuntimePermission() {
-
-        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-        || checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-
-            requestPermissions(new String[]{
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-            }, REQUEST_CODE);
-
-        }
-
-    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -85,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 final String user = edtUser.getText().toString();
                 final String password = edtPassword.getText().toString();
 
-                //Creamos la instancia para crear un nuevo usuario y le pasamos el usuario y la contraseña
+                //We create the instance to create a new user and pass the user and password
                 QBUser qbUser = new QBUser(user, password);
 
                 QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
@@ -97,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         intent.putExtra("user", user);
                         intent.putExtra("password", password);
                         startActivity(intent);
-                        finish(); //Cierra la actividad del ligin despues de logearse
+                        finish(); //Closes login activity after logging in
                     }
 
                     @Override
@@ -119,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void inicializqarFramework() {
 
-        //Inicializamos el servicio
+        //Initialize the service
         QBSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
         QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
 

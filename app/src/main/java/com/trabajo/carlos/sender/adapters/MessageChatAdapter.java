@@ -46,7 +46,7 @@ public class MessageChatAdapter extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            //Comprobamos si el mensaje ha sido enviado por el usuario actual
+            //Set counter unread messages
             if (qbChatMessages.get(position).getSenderId().equals(QBChatService.getInstance().getUser().getId())) {
                 view = inflater.inflate(R.layout.list_mensaje_enviado, null);
 

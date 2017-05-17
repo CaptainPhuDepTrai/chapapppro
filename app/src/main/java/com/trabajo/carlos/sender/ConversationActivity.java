@@ -193,7 +193,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                 //We put all the dialogues in cache
                 QBChatDialogHolder.getInstance().putDialogs(qbChatDialogs);
 
-                //Configurar unread
+                //Config unread
                 Set<String> setIds = new HashSet<>();
                 for (QBChatDialog chatDialog : qbChatDialogs)
                     setIds.add(chatDialog.getDialogId());
@@ -227,7 +227,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
 
     private void crearChatSesion() {
         final ProgressDialog mDialogo = new ProgressDialog(ConversationActivity.this);
-        mDialogo.setMessage("Espere...");
+        mDialogo.setMessage("Loading...");
         mDialogo.setCanceledOnTouchOutside(false);
         mDialogo.show();
 

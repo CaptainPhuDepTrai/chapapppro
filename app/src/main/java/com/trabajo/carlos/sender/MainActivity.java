@@ -19,10 +19,10 @@ import com.quickblox.users.model.QBUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    static final String APP_ID = "55736";
-    static final String AUTH_KEY = "fxZeB6RJSNhwpNn";
-    static final String AUTH_SECRET = "UsKyxNXtbzfVwux";
-    static final String ACCOUNT_KEY = "sspxhTd8dTFFwhuifqzC";
+    static final String APP_ID = "56914";
+    static final String AUTH_KEY = "wGsqaFNMLmbNzPQ";
+    static final String AUTH_SECRET = "KWHwJUUN67AfXFh";
+    static final String ACCOUNT_KEY = "cq5SMjXYz2NizfXMBrCy";
 
     static final int REQUEST_CODE = 1000;
 

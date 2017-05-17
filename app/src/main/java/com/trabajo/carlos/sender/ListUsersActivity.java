@@ -241,7 +241,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
 
     private void createGroupChat(SparseBooleanArray checkedItemPositions) {
         final ProgressDialog mDialogo = new ProgressDialog(ListUsersActivity.this);
-        mDialogo.setMessage("I waited\n...");
+        mDialogo.setMessage("Waited\n...");
         mDialogo.setCanceledOnTouchOutside(false);
         mDialogo.show();
 
@@ -297,7 +297,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
 
     private void createPrivateChat(SparseBooleanArray checkedItemPositions) {
         final ProgressDialog mDialogo = new ProgressDialog(ListUsersActivity.this);
-        mDialogo.setMessage("Espere...");
+        mDialogo.setMessage("Wait...");
         mDialogo.setCanceledOnTouchOutside(false);
         mDialogo.show();
 

@@ -115,7 +115,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
                     user.setPhone(telefono);
 
                 final ProgressDialog mDialog = new ProgressDialog(UserProfileActivity.this);
-                mDialog.setMessage("Espere...");
+                mDialog.setMessage("Wait...");
                 mDialog.show();
 
                 //We update the user

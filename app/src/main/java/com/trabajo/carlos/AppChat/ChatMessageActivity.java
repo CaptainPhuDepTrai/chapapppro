@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -50,9 +50,9 @@ import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.request.QBRequestUpdateBuilder;
 import com.squareup.picasso.Picasso;
-import com.trabajo.carlos.sender.adapters.MessageChatAdapter;
-import com.trabajo.carlos.sender.common.Common;
-import com.trabajo.carlos.sender.holder.QBMensajeHolder;
+import com.trabajo.carlos.AppChat.adapters.MessageChatAdapter;
+import com.trabajo.carlos.AppChat.common.Common;
+import com.trabajo.carlos.AppChat.holder.QBMessageHolder;
 
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.XMPPException;
@@ -105,7 +105,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_mensaje);
+        setContentView(R.layout.activity_chat_message);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar3);
 
@@ -125,7 +125,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     public boolean onCreateOptionsMenu(Menu menu) {
 
         if (qbChatDialog.getType() == QBDialogType.GROUP || qbChatDialog.getType() == QBDialogType.PUBLIC_GROUP)
-            getMenuInflater().inflate(R.menu.mensaje_chat_grupo_menu, menu);
+            getMenuInflater().inflate(R.menu.message_chat_group_menu, menu);
 
         return true;
 
@@ -133,7 +133,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        getMenuInflater().inflate(R.menu.mensaje_chat_context_menu, menu);
+        getMenuInflater().inflate(R.menu.message_chat_context_menu, menu);
     }
 
     @Override
@@ -143,11 +143,11 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
         contextMenuIndexClicked = info.position;
 
         switch (item.getItemId()) {
-            case R.id.mensaje_chat_actualizar:
+            case R.id.message_chat_update:
                 actualizarMensaje();
 
                 break;
-            case R.id.mensaje_chat_borrar:
+            case R.id.message_chat_delete:
                 borrarMensaje();
 
                 break;
@@ -273,8 +273,8 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                     //We fixed the bug that private chat does not display messages
                     if (qbChatDialog.getType() == QBDialogType.PRIVATE) {
                         //Cached Message
-                        QBMensajeHolder.getInstance().putMensaje(qbChatDialog.getDialogId(), mensajeChat);
-                        ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(mensajeChat.getDialogId());
+                        QBMessageHolder.getInstance().putMensaje(qbChatDialog.getDialogId(), mensajeChat);
+                        ArrayList<QBChatMessage> mensajes = QBMessageHolder.getInstance().getChatMensajesByDialogId(mensajeChat.getDialogId());
 
                         //We set the adapter from the list
                         adapter = new MessageChatAdapter(getBaseContext(), mensajes);
@@ -328,8 +328,8 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void processMessage(String s, QBChatMessage qbChatMessage, Integer integer) {
         //Cached Message
-        QBMensajeHolder.getInstance().putMensaje(qbChatMessage.getDialogId(), qbChatMessage);
-        ArrayList<QBChatMessage> mensajes = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatMessage.getDialogId());
+        QBMessageHolder.getInstance().putMensaje(qbChatMessage.getDialogId(), qbChatMessage);
+        ArrayList<QBChatMessage> mensajes = QBMessageHolder.getInstance().getChatMensajesByDialogId(qbChatMessage.getDialogId());
 
         //We set the adapter from the list
         adapter = new MessageChatAdapter(getBaseContext(), mensajes);
@@ -363,7 +363,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     private void editarNombreGrupo() {
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.dialog_editar_grupo_layout, null);
+        View view = inflater.inflate(R.layout.edit_group_dialog_layout, null);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(view);
@@ -415,7 +415,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
         borrarDialog.show();
 
         //We put the message for edittext
-        editMensaje = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
+        editMensaje = QBMessageHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
 
         QBRestChatService.deleteMessage(editMensaje.getId(), false).performAsync(new QBEntityCallback<Void>() {
             @Override
@@ -434,7 +434,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
     private void actualizarMensaje() {
 
         //We put the message for edittext
-        editMensaje = QBMensajeHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
+        editMensaje = QBMessageHolder.getInstance().getChatMensajesByDialogId(qbChatDialog.getDialogId()).get(contextMenuIndexClicked);
         edtMensaje.setText(editMensaje.getBody());
         isEditMode = true;
 
@@ -454,7 +454,7 @@ public class ChatMessageActivity extends AppCompatActivity implements View.OnCli
                 @Override
                 public void onSuccess(ArrayList<QBChatMessage> qbChatMessages, Bundle bundle) {
                     //We cache messages
-                    QBMensajeHolder.getInstance().putMensajes(qbChatDialog.getDialogId(), qbChatMessages);
+                    QBMessageHolder.getInstance().putMensajes(qbChatDialog.getDialogId(), qbChatMessages);
 
                     adapter = new MessageChatAdapter(getBaseContext(), qbChatMessages);
                     lsvListaMensajes.setAdapter(adapter);

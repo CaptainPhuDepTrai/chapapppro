@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

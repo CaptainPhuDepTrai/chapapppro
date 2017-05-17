@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import org.junit.Test;
 

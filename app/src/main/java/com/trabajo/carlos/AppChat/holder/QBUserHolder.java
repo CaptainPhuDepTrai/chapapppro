@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.holder;
+package com.trabajo.carlos.AppChat.holder;
 
 import android.util.SparseArray;
 
@@ -7,18 +7,18 @@ import com.quickblox.users.model.QBUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QBUsuariosHolder {
-    private static QBUsuariosHolder instance;
+public class QBUserHolder {
+    private static QBUserHolder instance;
 
     private SparseArray<QBUser> qbUserSparseArray;
 
-    public static synchronized QBUsuariosHolder getInstance() {
+    public static synchronized QBUserHolder getInstance() {
         if (instance == null)
-            instance = new QBUsuariosHolder();
+            instance = new QBUserHolder();
         return instance;
     }
 
-    private QBUsuariosHolder() {
+    private QBUserHolder() {
         qbUserSparseArray = new SparseArray<>();
     }
 

@@ -1,7 +1,7 @@
 <resources>
 
     //Actions and Titles
-    <string name="app_name">Sender</string>
+    <string name="app_name">AppChat</string>
     <string name="title_activity_chats_dialogs">ChatsDialogsActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_chat_mensaje">ChatMessageActivity</string>

@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.adapters;
+package com.trabajo.carlos.AppChat.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import com.github.library.bubbleview.BubbleTextView;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.model.QBChatMessage;
-import com.trabajo.carlos.sender.R;
-import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
+import com.trabajo.carlos.AppChat.R;
+import com.trabajo.carlos.AppChat.holder.QBUserHolder;
 
 import java.util.ArrayList;
 
@@ -48,18 +48,18 @@ public class MessageChatAdapter extends BaseAdapter {
 
             //Set counter unread messages
             if (qbChatMessages.get(position).getSenderId().equals(QBChatService.getInstance().getUser().getId())) {
-                view = inflater.inflate(R.layout.list_mensaje_enviado, null);
+                view = inflater.inflate(R.layout.list_message_sent, null);
 
                 BubbleTextView btxvMensaje = (BubbleTextView) view.findViewById(R.id.btxvMensaje);
                 btxvMensaje.setText(qbChatMessages.get(position).getBody());
             } else {
-                view = inflater.inflate(R.layout.list_mensaje_recibido, null);
+                view = inflater.inflate(R.layout.list_message_received, null);
 
                 BubbleTextView btxvMensaje = (BubbleTextView) view.findViewById(R.id.btxvMensaje);
                 btxvMensaje.setText(qbChatMessages.get(position).getBody());
 
                 TextView txvUsuarioMensaje = (TextView) view.findViewById(R.id.txvUsuarioMensaje);
-                txvUsuarioMensaje.setText(QBUsuariosHolder.getInstance().getUserById(qbChatMessages.get(position).getSenderId()).getFullName());
+                txvUsuarioMensaje.setText(QBUserHolder.getInstance().getUserById(qbChatMessages.get(position).getSenderId()).getFullName());
             }
         }
         return view;

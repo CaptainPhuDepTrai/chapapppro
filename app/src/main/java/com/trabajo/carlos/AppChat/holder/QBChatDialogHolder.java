@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.holder;
+package com.trabajo.carlos.AppChat.holder;
 
 import com.quickblox.chat.model.QBChatDialog;
 
@@ -13,7 +13,7 @@ public class QBChatDialogHolder {
 
     public static synchronized QBChatDialogHolder getInstance() {
         QBChatDialogHolder qbChatDialogHolder;
-        synchronized (QBMensajeHolder.class) {
+        synchronized (QBMessageHolder.class) {
             if (instance == null)
                 instance = new QBChatDialogHolder();
         }

@@ -1,7 +1,7 @@
-package com.trabajo.carlos.sender.common;
+package com.trabajo.carlos.AppChat.common;
 
 import com.quickblox.users.model.QBUser;
-import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
+import com.trabajo.carlos.AppChat.holder.QBUserHolder;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class Common {
     public static final int SELECCIONAR_FOTO = 7171;
 
     public static String createChatDialogName(List<Integer> qbUsuarios) {
-        List<QBUser> qbUsers1 = QBUsuariosHolder.getInstance().getUsersById(qbUsuarios);
+        List<QBUser> qbUsers1 = QBUserHolder.getInstance().getUsersById(qbUsuarios);
 
         // The name of the dialog will be the name of all the users in the list, if the length of the name is greater than 30 we put a "..." at the end
 

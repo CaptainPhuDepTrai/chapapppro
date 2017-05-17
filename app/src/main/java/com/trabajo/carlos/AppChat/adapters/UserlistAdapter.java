@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.adapters;
+package com.trabajo.carlos.AppChat.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

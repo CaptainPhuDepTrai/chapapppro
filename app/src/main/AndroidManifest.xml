@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.trabajo.carlos.sender">
+    package="com.trabajo.carlos.AppChat">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,25 +13,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.trabajo.carlos.AppChat.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
+        <activity android:name="com.trabajo.carlos.AppChat.SignUpActivity" />
         <activity
-            android:name=".ConversationActivity"
+            android:name="com.trabajo.carlos.AppChat.ConversationActivity"
             android:label="@string/title_activity_chats_dialogs"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ListUsersActivity" />
+        <activity android:name="com.trabajo.carlos.AppChat.ListUsersActivity" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name="com.trabajo.carlos.AppChat.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ChatMessageActivity"
+            android:name="com.trabajo.carlos.AppChat.ChatMessageActivity"
             android:label="@string/title_activity_chat_mensaje"
             android:theme="@style/AppTheme" />
     </application>

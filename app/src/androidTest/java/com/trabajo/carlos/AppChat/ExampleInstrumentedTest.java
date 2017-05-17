@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -32,11 +32,11 @@ import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.request.QBRequestGetBuilder;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
-import com.trabajo.carlos.sender.adapters.ChatDialogsAdapter;
-import com.trabajo.carlos.sender.common.Common;
-import com.trabajo.carlos.sender.holder.QBChatDialogHolder;
-import com.trabajo.carlos.sender.holder.QBUnreadMensajeHolder;
-import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
+import com.trabajo.carlos.AppChat.adapters.ChatDialogsAdapter;
+import com.trabajo.carlos.AppChat.common.Common;
+import com.trabajo.carlos.AppChat.holder.QBChatDialogHolder;
+import com.trabajo.carlos.AppChat.holder.QBUnreadMessageHolder;
+import com.trabajo.carlos.AppChat.holder.QBUserHolder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,7 +50,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conversaciones);
+        setContentView(R.layout.activity_conversations);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Sender");
         setSupportActionBar(toolbar);
@@ -88,7 +88,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         switch (item.getItemId()) {
-            case R.id.context_borrar_dialog:
+            case R.id.context_delete_dialog:
                 borrarConversacion(info.position);
                 break;
         }
@@ -199,11 +199,11 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                     setIds.add(chatDialog.getDialogId());
 
                 //Take the unread message
-                QBRestChatService.getTotalUnreadMessagesCount(setIds, QBUnreadMensajeHolder.getInstance().getBundle()).performAsync(new QBEntityCallback<Integer>() {
+                QBRestChatService.getTotalUnreadMessagesCount(setIds, QBUnreadMessageHolder.getInstance().getBundle()).performAsync(new QBEntityCallback<Integer>() {
                     @Override
                     public void onSuccess(Integer integer, Bundle bundle) {
                         //Caching
-                        QBUnreadMensajeHolder.getInstance().setBundle(bundle);
+                        QBUnreadMessageHolder.getInstance().setBundle(bundle);
 
                         //Refresh the list
                         ChatDialogsAdapter adapter = new ChatDialogsAdapter(getBaseContext(), QBChatDialogHolder.getInstance().getAllChatDialogs());
@@ -240,7 +240,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         QBUsers.getUsers(null).performAsync(new QBEntityCallback<ArrayList<QBUser>>() {
             @Override
             public void onSuccess(ArrayList<QBUser> qbUsers, Bundle bundle) {
-                QBUsuariosHolder.getInstance().putUsers(qbUsers);
+                QBUserHolder.getInstance().putUsers(qbUsers);
             }
 
             @Override

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.trabajo.carlos.sender.ChatMessageActivity"
-    tools:showIn="@layout/activity_chat_mensaje">
+    tools:context="com.trabajo.carlos.AppChat.ChatMessageActivity"
+    tools:showIn="@layout/activity_chat_message">
 
     <LinearLayout
         android:id="@+id/dialog_info"

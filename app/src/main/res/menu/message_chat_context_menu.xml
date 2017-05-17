@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/mensaje_chat_actualizar"
+        android:id="@+id/message_chat_update"
         android:title="@string/menu_actualizar" />
 
     <item
-        android:id="@+id/mensaje_chat_borrar"
+        android:id="@+id/message_chat_delete"
         android:title="@string/menu_borrar" />
 
 </menu>

@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.holder;
+package com.trabajo.carlos.AppChat.holder;
 
 import com.quickblox.chat.model.QBChatMessage;
 
@@ -6,24 +6,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class QBMensajeHolder {
+public class QBMessageHolder {
 
-    private static QBMensajeHolder instance;
+    private static QBMessageHolder instance;
 
     private HashMap<String, ArrayList<QBChatMessage>> qbChatMessageArray;
 
-    public static synchronized QBMensajeHolder getInstance() {
-        QBMensajeHolder qbMensajeHolder;
+    public static synchronized QBMessageHolder getInstance() {
+        QBMessageHolder qbMessageHolder;
 
-        synchronized (QBMensajeHolder.class) {
+        synchronized (QBMessageHolder.class) {
             if (instance == null)
-                instance = new QBMensajeHolder();
-            qbMensajeHolder = instance;
+                instance = new QBMessageHolder();
+            qbMessageHolder = instance;
         }
-        return qbMensajeHolder;
+        return qbMessageHolder;
     }
 
-    private QBMensajeHolder() {
+    private QBMessageHolder() {
         this.qbChatMessageArray = new HashMap<>();
     }
 

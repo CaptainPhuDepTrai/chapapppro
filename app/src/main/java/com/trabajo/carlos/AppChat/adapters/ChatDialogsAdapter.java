@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender.adapters;
+package com.trabajo.carlos.AppChat.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,8 +19,8 @@ import com.quickblox.content.model.QBFile;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.squareup.picasso.Picasso;
-import com.trabajo.carlos.sender.R;
-import com.trabajo.carlos.sender.holder.QBUnreadMensajeHolder;
+import com.trabajo.carlos.AppChat.R;
+import com.trabajo.carlos.AppChat.holder.QBUnreadMessageHolder;
 
 import java.util.ArrayList;
 
@@ -108,7 +108,7 @@ public class ChatDialogsAdapter extends BaseAdapter {
             TextDrawable.IBuilder unreadBuilder = TextDrawable.builder().beginConfig()
                     .endConfig()
                     .round();
-            int contador_unread = QBUnreadMensajeHolder.getInstance().getBundle().getInt(qbChatDialogs.get(position).getDialogId());
+            int contador_unread = QBUnreadMessageHolder.getInstance().getBundle().getInt(qbChatDialogs.get(position).getDialogId());
             if (contador_unread > 0) {
                 TextDrawable unread_drawable = unreadBuilder.build("" + contador_unread, Color.RED);
                 imgUnread.setImageDrawable(unread_drawable);

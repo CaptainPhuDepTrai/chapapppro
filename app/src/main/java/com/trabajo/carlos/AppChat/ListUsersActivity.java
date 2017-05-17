@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +22,9 @@ import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
-import com.trabajo.carlos.sender.adapters.UserlistAdapter;
-import com.trabajo.carlos.sender.common.Common;
-import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
+import com.trabajo.carlos.AppChat.adapters.UserlistAdapter;
+import com.trabajo.carlos.AppChat.common.Common;
+import com.trabajo.carlos.AppChat.holder.QBUserHolder;
 
 import org.jivesoftware.smack.SmackException;
 
@@ -43,7 +43,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado_usuarios);
+        setContentView(R.layout.activity_listed_users);
 
         mode = getIntent().getStringExtra(Common.UPDATE_MODE);
         qbChatDialog = (QBChatDialog) getIntent().getSerializableExtra(Common.UPDATE_DIALOG_EXTRA);
@@ -161,7 +161,7 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
 
                 List<Integer> occupantsId = qbChatDialog.getOccupants();
-                List<QBUser> listUsuariosYaEnElGrupo = QBUsuariosHolder.getInstance().getUsersById(occupantsId);
+                List<QBUser> listUsuariosYaEnElGrupo = QBUserHolder.getInstance().getUsersById(occupantsId);
                 ArrayList<QBUser> usuarios = new ArrayList<QBUser>();
                 usuarios.addAll(listUsuariosYaEnElGrupo);
 
@@ -187,11 +187,11 @@ public class ListUsersActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onSuccess(QBChatDialog qbChatDialog, Bundle bundle) {
 
-                ArrayList<QBUser> listadoUsuarios = QBUsuariosHolder.getInstance().getAllUsers();
+                ArrayList<QBUser> listadoUsuarios = QBUserHolder.getInstance().getAllUsers();
 
                 //We take all the info of the Occupants
                 List<Integer> occupantsId = qbChatDialog.getOccupants();
-                List<QBUser> listUsuariosYaEnElGrupo = QBUsuariosHolder.getInstance().getUsersById(occupantsId);
+                List<QBUser> listUsuariosYaEnElGrupo = QBUserHolder.getInstance().getUsersById(occupantsId);
 
                 //Delete all users who are already in the group
                 for (QBUser user : listUsuariosYaEnElGrupo)

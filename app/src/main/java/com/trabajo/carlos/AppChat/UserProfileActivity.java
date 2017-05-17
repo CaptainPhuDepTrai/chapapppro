@@ -1,4 +1,4 @@
-package com.trabajo.carlos.sender;
+package com.trabajo.carlos.AppChat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,12 +25,11 @@ import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
-import com.trabajo.carlos.sender.common.Common;
-import com.trabajo.carlos.sender.holder.QBUsuariosHolder;
+import com.trabajo.carlos.AppChat.common.Common;
+import com.trabajo.carlos.AppChat.holder.QBUserHolder;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -251,7 +249,7 @@ public class UserProfileActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {
                 //Caching
-                QBUsuariosHolder.getInstance().putUser(qbUser);
+                QBUserHolder.getInstance().putUser(qbUser);
                 if (qbUser.getFileId() != null) {
                     int imagenPerfilId = qbUser.getFileId();
 
